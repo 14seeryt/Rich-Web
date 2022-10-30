@@ -40,7 +40,7 @@ if (frm != null) {
             //Adding content
             nameEl.textContent = name.value;
             phoneEl.textContent = number.value;
-            emailEl.textContent = number.value;
+            emailEl.textContent = email.value;
             delEl.textContent = "X";
 
             //Adding Classes
@@ -105,9 +105,11 @@ frm.addEventListener('input', function () {
     if (name.value != null) {
         document.querySelector(".showName").textContent = name.value;
         document.querySelector(".showPhone").textContent = number.value;
+        document.querySelector(".showEmail").textContent = email.value;
     }
     else {
         document.querySelector(".showName").textContent = " ";
         document.querySelector(".showPhone").textContent = " ";
+        document.querySelector(".showEmail").textContent = " ";
     }
 })
