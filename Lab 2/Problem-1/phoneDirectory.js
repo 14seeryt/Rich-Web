@@ -1,46 +1,113 @@
-function validateForm() {
-    var valid = true;
+//Showing and Hidding contents
+const btn = document.querySelector(".btnNav");
+btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    const data = document.querySelector(".showEntry");
+    const entry = document.querySelector(".addEntry");
 
-    if (!validateField(this, 'name'))
-        valid = false;
-
-    if (!validateField(this, 'email'))
-        valid = false;
-
-    if (!validateField(this, 'number'))
-        valid = false;
-
-    return valid;
-}
-
-function validateField(context, fieldName) {
-    var field = document.forms['entForm'][fieldName],
-        msg = 'Please enter your ' + fieldName,
-        errorField = document.getElementById(fieldName + '_error');
-    console.log(context);
-    if (context instanceof HTMLFormElement || context.id === fieldName)
-        errorField.innerHTML = (field.value === '') ? msg : '';
-
-    return field.value !== ''; // return if the field is fulfilled
-}
-
-function lettersAndSpaceCheck(name) {
-    var regEx = /^[a-z][a-z\s]*$/;
-    if (name.value.match(regEx)) {
-        return true;
+    if (e.target.textContent == "Add A New Entry") {
+        e.target.textContent = "Go Back";
+        data.classList.add("hidden");
+        entry.classList.remove("hidden");
     }
     else {
-        alert("Please enter letters and space only.");
-        return false;
+        e.target.textContent = "Add A New Entry";
+        data.classList.remove("hidden");
+        entry.classList.add("hidden");
     }
+})
+
+//Event Listner For Adding Contacts
+const frm = document.querySelector("#entForm");
+const list = document.querySelector("#conList");
+if (frm != null) {
+    frm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        //create Elements
+        var name = document.querySelector("#name");
+        var number = document.querySelector("#number");
+        var email = document.querySelector("#email");
+
+
+        if ((name.value && number.value) != "") {
+            const nameEl = document.createElement('td');
+            const phoneEl = document.createElement('td');
+            const emailEl = document.createElement('td');
+            const delEl = document.createElement('td');
+            const el = document.createElement('tr');
+
+            //Adding content
+            nameEl.textContent = name.value;
+            phoneEl.textContent = number.value;
+            emailEl.textContent = number.value;
+            delEl.textContent = "X";
+
+            //Adding Classes
+            delEl.classList.add('delete');
+
+            //Adding to table
+            el.appendChild(nameEl);
+            el.appendChild(phoneEl);
+            el.appendChild(emailEl);
+            el.appendChild(delEl);
+            list.appendChild(el);
+
+            //
+
+            //Clear Fields
+            name.value = null;
+            number.value = null;
+            email.value = null;
+            document.querySelector(".showName").textContent = name.value;
+            document.querySelector(".showPhone").textContent = number.value;
+            document.querySelector(".showEmail").textContent = email.value;
+            //Show Alert
+
+            document.querySelector(".alert").textContent = "Entry Added To Directory";
+            document.querySelector(".alert").style.background = "green";
+            setTimeout(clearAlert, 1500);
+        }
+        else {
+            document.querySelector(".alert").textContent = "Please Fill All The Fields";
+            document.querySelector(".alert").style.background = "red";
+            setTimeout(clearAlert, 1500);
+        }
+        function clearAlert() {
+            document.querySelector(".alert").textContent = "";
+
+        }
+    });
 }
 
-document.addEventListener('DOMContentLoaded', function () { // when the DOM is ready
-    // add event handlers when changing the fields' value
-    document.getElementById('name').addEventListener('input', validateForm);
-    document.getElementById('number').addEventListener('input', validateForm);
-    document.getElementById('email').addEventListener('input', validateForm);
 
-    // add the event handler for the submit event
-    document.getElementById('entForm').addEventListener('submit', validateForm);
-});
+
+//Event Listner For Deleting Contacts
+
+if (list != null) {
+    list.addEventListener('click', function (e) {
+        if (e.target.className == "delete") {
+            const el = e.target.parentElement;
+            el.parentElement.removeChild(el);
+        }
+    });
+}
+
+
+
+//To Show Real-Time data
+
+frm.addEventListener('input', function () {
+
+    var name = document.querySelector("#name");
+    var number = document.querySelector("#number");
+    var email = document.querySelector("#email");
+    if (name.value != null) {
+        document.querySelector(".showName").textContent = name.value;
+        document.querySelector(".showPhone").textContent = number.value;
+    }
+    else {
+        document.querySelector(".showName").textContent = " ";
+        document.querySelector(".showPhone").textContent = " ";
+    }
+})
