@@ -54,14 +54,15 @@
         <div class="addEntry hidden">
 
             <form class="entry-form" method="post" id="entForm">
-                <div class="formg">Name : <input class="form-el" type="text" name="name" id="name" placeholder="Name">
+                <div class="formg">Name : <input class="form-el" type="text" required minlength="3" maxlength="20"
+                        name="name" id="name" placeholder="Name">
                 </div>
 
-                <div class="formg">Phone Number : <input class="form-el" type="text" name="number" id="number"
-                        placeholder="Phone Number"></div>
+                <div class="formg">Phone Number : <input class="form-el" type="number" required minlength="9"
+                        maxlength="10" name="number" id="number" placeholder="Phone Number"></div>
 
-                <div class="formg">Email : <input class="form-el" type="email" name="email" id="email"
-                        placeholder="Email"></div>
+                <div class="formg">Email : <input class="form-el" type="email" required minlength="1" maxlength="40"
+                        name="email" id="email" placeholder="Email"></div>
                 <input type="submit" class="formbtn btn" name="submit" id="submit" value="Add">
             </form>
 

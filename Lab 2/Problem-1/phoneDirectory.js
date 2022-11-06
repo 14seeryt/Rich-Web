@@ -38,6 +38,7 @@ if (frm != null) {
             const el = document.createElement('tr');
 
             //Adding content
+            validation();
             nameEl.textContent = name.value;
             phoneEl.textContent = number.value;
             emailEl.textContent = email.value;
@@ -45,7 +46,6 @@ if (frm != null) {
 
             //Adding Classes
             delEl.classList.add('delete');
-
             //Adding to table
             el.appendChild(nameEl);
             el.appendChild(phoneEl);
@@ -53,7 +53,7 @@ if (frm != null) {
             el.appendChild(delEl);
             list.appendChild(el);
 
-            //
+
 
             //Clear Fields
             name.value = null;
@@ -69,7 +69,7 @@ if (frm != null) {
             setTimeout(clearAlert, 1500);
         }
         else {
-            document.querySelector(".alert").textContent = "Please Fill All The Fields";
+            document.querySelector(".alert").textContent = "Error";
             document.querySelector(".alert").style.background = "red";
             setTimeout(clearAlert, 1500);
         }
@@ -77,10 +77,20 @@ if (frm != null) {
             document.querySelector(".alert").textContent = "";
 
         }
+
     });
 }
 
+function validation() {
+    var letters = /^[A-Za-z]+$/;
 
+    if (frm.name.match(letters)) {
+        return true;
+    }
+    else {
+        alert("Please enter letters and space only")
+    }
+}
 
 //Event Listner For Deleting Contacts
 
