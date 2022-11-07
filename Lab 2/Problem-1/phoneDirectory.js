@@ -38,7 +38,7 @@ if (frm != null) {
             const el = document.createElement('tr');
 
             //Adding content
-            validation();
+
             nameEl.textContent = name.value;
             phoneEl.textContent = number.value;
             emailEl.textContent = email.value;
