@@ -5,16 +5,24 @@ const btn = document.getElementById(".btnNav");
 const myObservable = fromEvent(button, 'click');
 
 // instead of a function, we will pass an object with next, error, and complete methods
-const subscription = myObservable.subscribe({
-    // on successful emissions
-    next: event => console.log(event),
-    // on errors
-    error: error => console.log(error),
-    // called once on completion
-    complete: () => console.log('complete!')
+const subscription = myObservable.subscribe('click', function (e){
+    e.preventDefault();
+    const data = document.querySelector(".showEntry");
+    const entry = document.querySelector(".addEntry");
+
+    if (e.target.textContent == "Add A New Entry") {
+        e.target.textContent = "Go Back";
+        data.classList.add("hidden");
+        entry.classList.remove("hidden");
+    }
+    else {
+        e.target.textContent = "Add A New Entry";
+        data.classList.remove("hidden");
+        entry.classList.add("hidden");
+    }
   });
 
-// btn.addEventListener('click', function (e) {
+//  btn.addEventListener('click', function (e) {
 //     e.preventDefault();
 //     const data = document.querySelector(".showEntry");
 //     const entry = document.querySelector(".addEntry");
