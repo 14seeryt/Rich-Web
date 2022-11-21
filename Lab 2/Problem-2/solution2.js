@@ -1,10 +1,12 @@
-function (e) {
+function count(e) {
 
     e.preventDefault()
 
-    fetch('https://jsonplaceholder.typicode.com/posts')
-        .then(response => response.json())
-        .then(json => console.log(json.filter(titleLength))) //for titles part
+    fetch('https://jsonplaceholder.typicode.com/todos')
+        .then(response => console.log(response.json()))
+        .then(json => console.log(json(titleLength))) //for titles part
+        .then(json => console.log(json.filter(frequency())))
+
 
     function titleLength(json) {
         const titles = json.title

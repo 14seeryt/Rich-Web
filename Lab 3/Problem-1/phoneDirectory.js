@@ -1,23 +1,35 @@
 import { fromEvent } from 'rxjs';
 
 //Showing and Hidding contents
-const btn = document.querySelector(".btnNav");
-btn.addEventListener('click', function (e) {
-    e.preventDefault();
-    const data = document.querySelector(".showEntry");
-    const entry = document.querySelector(".addEntry");
+const btn = document.getElementById(".btnNav");
+const myObservable = fromEvent(button, 'click');
 
-    if (e.target.textContent == "Add A New Entry") {
-        e.target.textContent = "Go Back";
-        data.classList.add("hidden");
-        entry.classList.remove("hidden");
-    }
-    else {
-        e.target.textContent = "Add A New Entry";
-        data.classList.remove("hidden");
-        entry.classList.add("hidden");
-    }
-})
+// instead of a function, we will pass an object with next, error, and complete methods
+const subscription = myObservable.subscribe({
+    // on successful emissions
+    next: event => console.log(event),
+    // on errors
+    error: error => console.log(error),
+    // called once on completion
+    complete: () => console.log('complete!')
+  });
+
+// btn.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const data = document.querySelector(".showEntry");
+//     const entry = document.querySelector(".addEntry");
+
+//     if (e.target.textContent == "Add A New Entry") {
+//         e.target.textContent = "Go Back";
+//         data.classList.add("hidden");
+//         entry.classList.remove("hidden");
+//     }
+//     else {
+//         e.target.textContent = "Add A New Entry";
+//         data.classList.remove("hidden");
+//         entry.classList.add("hidden");
+//     }
+// })
 
 //Event Listner For Adding Contacts
 const frm = document.querySelector("#entForm");
