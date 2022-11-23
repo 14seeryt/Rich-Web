@@ -36,7 +36,9 @@
 
     function countdown () {
             
-            const second = of(secondInput.value)
+            const seconds = of(secondInput.value)
+
+            seconds.pipe()
         
              const observable = new Observable(function(subscriber) {
                 subscriber.next(second-1)
