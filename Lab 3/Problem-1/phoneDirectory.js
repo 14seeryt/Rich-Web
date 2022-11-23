@@ -1,11 +1,12 @@
-import { fromEvent } from 'rxjs';
-
 //Showing and Hidding contents
-const btn = document.getElementById(".btnNav");
-const myObservable = fromEvent(button, 'click');
+const {fromEvent} = rxjs;
+const btn = document.querySelector(".btnNav");
+const myObservable = fromEvent(btn, 'click');
+
 
 // instead of a function, we will pass an object with next, error, and complete methods
-const subscription = myObservable.subscribe('click', function (e){
+const subscription = myObservable.subscribe(function (e){
+    console.log(e);
     e.preventDefault();
     const data = document.querySelector(".showEntry");
     const entry = document.querySelector(".addEntry");
@@ -42,8 +43,11 @@ const subscription = myObservable.subscribe('click', function (e){
 //Event Listner For Adding Contacts
 const frm = document.querySelector("#entForm");
 const list = document.querySelector("#conList");
+
+const myObservable2 = fromEvent(frm, 'submit');
+
 if (frm != null) {
-    frm.addEventListener('submit', function (e) {
+    myObservable2.subscribe(function (e) {
         e.preventDefault();
 
         //create Elements
@@ -75,7 +79,7 @@ if (frm != null) {
             el.appendChild(delEl);
             list.appendChild(el);
 
-            PhoneValidate();
+            //PhoneValidate();
 
 
 
@@ -131,8 +135,10 @@ function validation() {
 
 //Event Listner For Deleting Contacts
 
+const myObservable3 = fromEvent(list, 'click');
+
 if (list != null) {
-    list.addEventListener('click', function (e) {
+    myObservable3.subscribe(function (e) {
         if (e.target.className == "delete") {
             const el = e.target.parentElement;
             el.parentElement.removeChild(el);
@@ -144,7 +150,9 @@ if (list != null) {
 
 //To Show Real-Time data
 
-frm.addEventListener('input', function () {
+const myObservable5 = fromEvent(frm, 'input');
+
+myObservable5.subscribe(function () {
 
     var name = document.querySelector("#name");
     var number = document.querySelector("#number");
