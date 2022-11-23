@@ -17,13 +17,55 @@
 
     <script type="text/javascript" src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
     <script>
+        const {fromEvent, scan, of, Observable} = rxjs;
+        
         const hourInput = document.getElementById("hour");
         
         const minuteInput = document.getElementById("minute");
-        
-        const secondInput = document.getElementById("second");
 
+        const secondInput = document.getElementById("second");
+        
         const button = document.getElementById("button");
+
+        const myObservable = fromEvent(button, 'click');
+
+        myObservable.subscribe(function () {
+
+        countdown()
+    });
+
+    function countdown () {
+            
+            const second = of(secondInput.value)
+        
+             const observable = new Observable(function(subscriber) {
+                subscriber.next(second-1)
+            }).pipe(scan(function(value){
+                console.log(value)
+            }))
+
+            observable.subscribe(function(value) {
+                secondInput.value = value
+                console.log(value);
+            })
+
+            let hour = hourInput.value
+        
+            let minute = minuteInput.value
+        
+            
+
+            if(!hour){
+            hour = 0;
+            }
+            if(!minute){
+                minute = 0;
+            }
+            if(!second){
+                second = 0;
+            } 
+
+    }
 
     </script>
 </body>
