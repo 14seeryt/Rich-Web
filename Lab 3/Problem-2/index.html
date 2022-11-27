@@ -7,46 +7,51 @@
     <title>Document</title>
 </head>
 <body>
+
+    <!-- adding input fields -->
+
     <input type="number" id ="hour" placeholder="h">
     
     <input type="number" id ="minute" placeholder="m">
     
     <input type="number" id ="second" placeholder="s">
 
+    <!-- Start Button -->
+
     <button id="button">start</button>
 
+    <!-- Import RxJS -->
+
     <script type="text/javascript" src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
-    <script>
-        
-        const {fromEvent, interval, takeWhile} = rxjs;
+    <script> 
+        const {fromEvent, interval, takeWhile} = rxjs;  //importing from RxJS
 
-        const startBtn = document.getElementById('button');
-        const observable = fromEvent(button, 'click');
+        const startBtn = document.getElementById('button'); //Get button by id 
+        const observable = fromEvent(button, 'click'); //create observable/event for when start button is clicked
 
-        observable.subscribe(() => {
+        observable.subscribe(() => {    //make the button subscribe to the function 
         
+        const hoursInput = document.getElementById("hour"); //Store input in const 
         
-        const hoursInput = document.getElementById("hour");
-        
-        const minutesInput = document.getElementById("minute");
+        const minutesInput = document.getElementById("minute"); //Store input in const 
 
-        const secondsInput = document.getElementById("second");
+        const secondsInput = document.getElementById("second"); //Store input in const 
         
-        const button = document.getElementById("button");
+        const button = document.getElementById("button");   //get button by id in button constant  
 
-        const hours = hoursInput.valueAsNumber || 0;
+        const hours = hoursInput.valueAsNumber || 0; //get inputs or or 0     
         const minutes = minutesInput.valueAsNumber || 0;
         const seconds = secondsInput.valueAsNumber || 0;
 
-        if (hours < 0 || minutes < 0 || seconds < 0) {
+        if (hours < 0 || minutes < 0 || seconds < 0) {  //prevents negative numbers
             return;
         }
 
-        const totalSeconds = hours * 60 *60 + minutes * 60 + seconds;
+        const totalSeconds = hours * 60 * 60 + minutes * 60 + seconds;  //gets the total amount of seconds the user enters 
 
-        const timer = interval(1000).pipe(takeWhile((time) => time <= totalSeconds));
+        const timer = interval(1000).pipe(takeWhile((time) => time <= totalSeconds));   //interval of 1000 milliseconds 
     
-        timer.subscribe((time) => {
+        timer.subscribe((time) => { //converts the totalseconds into hours minutes and seconds 
             hoursInput.value = Math.floor((totalSeconds - time) / 3600);
             minutesInput.value = Math.floor((totalSeconds - time) / 60) % 60;
             secondsInput.value = (totalSeconds - time) % 60;
