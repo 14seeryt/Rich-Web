@@ -7,21 +7,26 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="number" id ="hour">
+    <input type="number" id ="hour" placeholder="h">
     
-    <input type="number" id ="minute">
+    <input type="number" id ="minute" placeholder="m">
     
-    <input type="number" id ="second">
+    <input type="number" id ="second" placeholder="s">
 
     <button id="button">start</button>
 
     <script type="text/javascript" src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
     <script>
-
-        Observable.subscribe(() => {
-        const {fromEvent, interval, takeWhile} = rxjs;
         
-        const hourInput = document.getElementById("hour");
+        const {fromEvent, interval, takeWhile} = rxjs;
+
+        const startBtn = document.getElementById('button');
+        const observable = fromEvent(button, 'click');
+
+        observable.subscribe(() => {
+        
+        
+        const hoursInput = document.getElementById("hour");
         
         const minutesInput = document.getElementById("minute");
 
