@@ -17,7 +17,9 @@
 
     <script type="text/javascript" src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
     <script>
-        const {fromEvent, scan, of, Observable} = rxjs;
+
+        Observable.subscribe(() => {
+        const {fromEvent, interval, takeWhile} = rxjs;
         
         const hourInput = document.getElementById("hour");
         
@@ -44,7 +46,7 @@
             minutesInput.value = Math.floor((totalSeconds - time) / 60) % 60;
             secondsInput.value = (totalSeconds - time) % 60;
         });
-
+    });
     </script>
 </body>
 </html>
