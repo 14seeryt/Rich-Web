@@ -21,9 +21,9 @@
         
         const hourInput = document.getElementById("hour");
         
-        const minuteInput = document.getElementById("minute");
+        const minutesInput = document.getElementById("minute");
 
-        const secondInput = document.getElementById("second");
+        const secondsInput = document.getElementById("second");
         
         const button = document.getElementById("button");
 
@@ -31,12 +31,20 @@
         const minutes = minutesInput.valueAsNumber || 0;
         const seconds = secondsInput.valueAsNumber || 0;
 
-        const myObservable = fromEvent(button, 'click');
+        if (hours < 0 || minutes < 0 || seconds < 0) {
+            return;
+        }
 
-        myObservable.subscribe(function () {
+        const totalSeconds = hours * 60 *60 + minutes * 60 + seconds;
 
-        countdown()
-    });
+        const timer = interval(1000).pipe(takeWhile((time) => time <= totalSeconds));
+    
+        timer.subscribe((time) => {
+            hoursInput.value = Math.floor((totalSeconds - time) / 3600);
+            minutesInput.value = Math.floor((totalSeconds - time) / 60) % 60;
+            secondsInput.value = (totalSeconds - time) % 60;
+        });
+
     </script>
 </body>
 </html>
