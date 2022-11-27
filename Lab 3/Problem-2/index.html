@@ -37,42 +37,6 @@
 
         countdown()
     });
-
-    function countdown () {
-            
-            const seconds = of(secondInput.value)
-
-            seconds.pipe()
-        
-             const observable = new Observable(function(subscriber) {
-                subscriber.next(second-1)
-            }).pipe(scan(function(value){
-                console.log(value)
-            }))
-
-            observable.subscribe(function(value) {
-                secondInput.value = value
-                console.log(value);
-            })
-
-            let hour = hourInput.value
-        
-            let minute = minuteInput.value
-        
-            
-
-            if(!hour){
-            hour = 0;
-            }
-            if(!minute){
-                minute = 0;
-            }
-            if(!second){
-                second = 0;
-            } 
-
-    }
-
     </script>
 </body>
 </html>
