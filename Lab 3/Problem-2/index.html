@@ -27,6 +27,10 @@
         
         const button = document.getElementById("button");
 
+        const hours = hoursInput.valueAsNumber || 0;
+        const minutes = minutesInput.valueAsNumber || 0;
+        const seconds = secondsInput.valueAsNumber || 0;
+
         const myObservable = fromEvent(button, 'click');
 
         myObservable.subscribe(function () {
