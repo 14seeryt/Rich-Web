@@ -81,8 +81,6 @@ if (frm != null) {
 
             //PhoneValidate();
 
-
-
             //Clear Fields
             name.value = null;
             number.value = null;
@@ -133,7 +131,7 @@ function validation() {
     }
 }
 
-//Event Listner For Deleting Contacts
+//Event Listener For Deleting Contacts
 
 const myObservable3 = fromEvent(list, 'click');
 
